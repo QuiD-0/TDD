@@ -1,4 +1,4 @@
-package com.quid.tdd.product;
+package com.quid.tdd.product.usecase;
 
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -8,7 +8,7 @@ import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.domain.DiscoundPolicy;
 import com.quid.tdd.product.domain.Product;
 import com.quid.tdd.product.domain.repository.ProductRepository;
-import com.quid.tdd.product.usecase.ProductSaveUseCase;
+import com.quid.tdd.product.usecase.fake.FakeProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,12 +47,5 @@ public class ProductSaveUseCaseTest {
         final AddProductRequest request = new AddProductRequest(null, 1000, DiscoundPolicy.NONE);
 
         assertThatCode(() -> productService.addProduct(request)).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    static class FakeProductRepository implements ProductRepository {
-        @Override
-        public Product save(Product product) {
-            return product;
-        }
     }
 }

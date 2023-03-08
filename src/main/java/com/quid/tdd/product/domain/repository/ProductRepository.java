@@ -8,6 +8,8 @@ public interface ProductRepository {
 
     Product save(Product product);
 
+    Product findByIdOrThrow(Long productId);
+
     @Repository
     @RequiredArgsConstructor
     class ProductRepositoryImpl implements ProductRepository {
@@ -17,6 +19,12 @@ public interface ProductRepository {
         @Override
         public Product save(Product product) {
             return productJpaRepository.save(product);
+        }
+
+        @Override
+        public Product findByIdOrThrow(Long productId) {
+            return productJpaRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
         }
     }
 }
