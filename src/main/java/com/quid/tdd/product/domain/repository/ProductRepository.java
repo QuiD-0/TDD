@@ -24,7 +24,7 @@ public interface ProductRepository {
         @Override
         public Product findByIdOrThrow(Long productId) {
             return productJpaRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Product not found"));
         }
     }
 }

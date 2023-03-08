@@ -1,6 +1,7 @@
 package com.quid.tdd.product.usecase;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
 import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.domain.DiscoundPolicy;
@@ -34,5 +35,13 @@ public class ProductFindUseCaseTest {
         Product product = productFindUseCase.findProductById(productId);
 
         assertThat(product.getName()).isEqualTo("상품명");
+    }
+
+    @Test
+    @DisplayName("상품을 조회할 때 상품이 없으면 예외를 발생시킨다.")
+    void find_product_by_id_when_product_is_not_exist() {
+        final Long productId = 2L;
+
+        assertThatCode(() -> productFindUseCase.findProductById(productId)).isInstanceOf(IllegalArgumentException.class);
     }
 }
