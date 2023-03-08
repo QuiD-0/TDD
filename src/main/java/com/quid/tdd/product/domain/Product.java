@@ -1,8 +1,8 @@
-package com.quid.tdd.product;
+package com.quid.tdd.product.domain;
 
 import org.springframework.util.Assert;
 
-class Product {
+public class Product {
 
     private Long id;
     private final String name;
