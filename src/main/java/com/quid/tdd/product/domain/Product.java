@@ -1,18 +1,28 @@
 package com.quid.tdd.product.domain;
 
-import org.springframework.util.Assert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@Entity
+@Table(name = "products")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private final String name;
-    private final int price;
-    private final DiscoundPolicy policy;
+    private String name;
+    private int price;
+    private DiscoundPolicy policy;
 
     private Product(String name, int price, DiscoundPolicy policy) {
-        Assert.hasText(name, "상품명은 필수입니다.");
-        Assert.isTrue(price > 0, "상품 가격은 0보다 커야 합니다.");
-        Assert.notNull(policy, "할인 정책은 필수입니다.");
         this.name = name;
         this.price = price;
         this.policy = policy;
@@ -20,13 +30,5 @@ public class Product {
 
     public static Product create(String name, int price, DiscoundPolicy policy) {
         return new Product(name, price, policy);
-    }
-
-    public void assignId(Long seq) {
-        this.id = seq;
-    }
-
-    public Long getId() {
-        return id;
     }
 }

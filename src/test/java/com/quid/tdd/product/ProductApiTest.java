@@ -4,12 +4,13 @@ package com.quid.tdd.product;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.quid.tdd.ApiTest;
-import com.quid.tdd.product.domain.DiscoundPolicy;
 import com.quid.tdd.product.controller.model.AddProductRequest;
+import com.quid.tdd.product.domain.DiscoundPolicy;
 import com.quid.tdd.product.usecase.ProductSaveUseCase;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import javax.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
