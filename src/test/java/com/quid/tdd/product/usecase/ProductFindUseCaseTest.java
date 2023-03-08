@@ -32,7 +32,7 @@ public class ProductFindUseCaseTest {
     void find_product_by_id() {
         final Long productId = 1L;
 
-        Product product = productFindUseCase.findProductById(productId);
+        Product product = productFindUseCase.findByIdOrThrow(productId);
 
         assertThat(product.getName()).isEqualTo("상품명");
     }
@@ -42,6 +42,6 @@ public class ProductFindUseCaseTest {
     void find_product_by_id_when_product_is_not_exist() {
         final Long productId = 2L;
 
-        assertThatCode(() -> productFindUseCase.findProductById(productId)).isInstanceOf(IllegalArgumentException.class);
+        assertThatCode(() -> productFindUseCase.findByIdOrThrow(productId)).isInstanceOf(IllegalArgumentException.class);
     }
 }

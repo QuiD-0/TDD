@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 public interface ProductFindUseCase {
 
-    Product findProductById(Long productId);
+    Product findByIdOrThrow(Long productId);
 
     @Service
     @RequiredArgsConstructor
@@ -15,7 +15,7 @@ public interface ProductFindUseCase {
 
         private final ProductRepository productRepository;
 
-        public Product findProductById(Long productId) {
+        public Product findByIdOrThrow(Long productId) {
             return productRepository.findByIdOrThrow(productId);
         }
     }
