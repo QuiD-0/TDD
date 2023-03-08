@@ -5,8 +5,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.quid.tdd.ApiTest;
 import com.quid.tdd.product.domain.DiscoundPolicy;
-import com.quid.tdd.product.domain.model.AddProductRequest;
-import com.quid.tdd.product.usecase.ProductSaveUsecase;
+import com.quid.tdd.product.controller.model.AddProductRequest;
+import com.quid.tdd.product.usecase.ProductSaveUseCase;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -18,7 +18,7 @@ import org.springframework.http.MediaType;
 public class ProductApiTest extends ApiTest {
 
     @Autowired
-    ProductSaveUsecase productService;
+    ProductSaveUseCase productService;
 
     @Test
     void 상품등록() {
