@@ -1,4 +1,4 @@
-package com.quid.tdd.product.usecase.fake;
+package com.quid.tdd.product.fake;
 
 import com.quid.tdd.product.controller.model.UpdateProductRequest;
 import com.quid.tdd.product.domain.Product;
