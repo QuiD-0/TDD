@@ -2,6 +2,7 @@ package com.quid.tdd.product.usecase;
 
 import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.domain.Product;
+import com.quid.tdd.product.domain.ProductValidator;
 import com.quid.tdd.product.domain.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,8 @@ public interface ProductSaveUseCase {
         @Override
         @Transactional
         public Product addProduct(AddProductRequest request) {
-            return productRepository.save(request.toProduct());
+            Product product = ProductValidator.validate(request.toProduct());
+            return productRepository.save(product);
         }
     }
 

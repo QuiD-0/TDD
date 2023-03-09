@@ -10,6 +10,7 @@ import com.quid.tdd.product.domain.repository.ProductRepository;
 import com.quid.tdd.product.usecase.ProductFindUseCase.ProductFindUseCaseImpl;
 import com.quid.tdd.product.usecase.ProductSaveUseCase.ProductSaveUseCaseImpl;
 import com.quid.tdd.product.usecase.fake.FakeProductRepository;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,5 +44,13 @@ public class ProductFindUseCaseTest {
         final Long productId = 2L;
 
         assertThatCode(() -> productFindUseCase.findByIdOrThrow(productId)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("상품의 리스트를 조회한다.")
+    void find_product_list() {
+        List<Product> list = productFindUseCase.findAll();
+
+        assertThat(list.size()).isEqualTo(1);
     }
 }

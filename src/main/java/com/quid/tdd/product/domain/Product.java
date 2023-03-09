@@ -31,4 +31,9 @@ public class Product {
     public static Product create(String name, int price, DiscoundPolicy policy) {
         return new Product(name, price, policy);
     }
+
+    public void update(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
 }
