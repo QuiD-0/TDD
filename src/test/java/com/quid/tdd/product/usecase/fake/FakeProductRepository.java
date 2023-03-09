@@ -1,8 +1,10 @@
 package com.quid.tdd.product.usecase.fake;
 
+import com.quid.tdd.product.controller.model.UpdateProductRequest;
 import com.quid.tdd.product.domain.Product;
 import com.quid.tdd.product.domain.repository.ProductRepository;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FakeProductRepository implements ProductRepository {
@@ -22,5 +24,16 @@ public class FakeProductRepository implements ProductRepository {
             throw new IllegalArgumentException("Product not found");
         }
         return product;
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return List.copyOf(persistence.values());
+    }
+
+    @Override
+    public void updateProduct(Product product, UpdateProductRequest request) {
+        product.update(request.name(), request.price());
+        persistence.put(1L, product);
     }
 }
