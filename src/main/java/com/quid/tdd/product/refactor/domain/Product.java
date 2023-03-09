@@ -18,5 +18,8 @@ public record Product(
         if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("price must be greater than 0");
         }
+        if (id == null){
+            id = 0L;
+        }
     }
 }
