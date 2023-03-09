@@ -8,7 +8,8 @@ import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.domain.DiscoundPolicy;
 import com.quid.tdd.product.domain.Product;
 import com.quid.tdd.product.domain.repository.ProductRepository;
-import com.quid.tdd.product.fake.FakeProductRepository;
+import com.quid.tdd.product.usecase.fake.FakeProductRepository;
+import com.quid.tdd.product.usecase.ProductSaveUseCase.ProductSaveUseCaseImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class ProductSaveUseCaseTest {
     @BeforeEach
     void setUp() {
         ProductRepository fakeProductRepository = new FakeProductRepository();
-        productService = new ProductSaveUseCase.ProductSaveUseCaseImpl(fakeProductRepository);
+        productService = new ProductSaveUseCaseImpl(fakeProductRepository);
     }
 
     @Test

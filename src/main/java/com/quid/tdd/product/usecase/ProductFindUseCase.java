@@ -23,7 +23,7 @@ public interface ProductFindUseCase {
         @Override
         @Transactional(readOnly = true)
         public ProductResponse findProduct(Long productId) {
-            Product product = productRepository.findByIdOrThrow(productId);
+            Product product = productRepository.findById(productId);
             return ProductResponse.of(product);
         }
 

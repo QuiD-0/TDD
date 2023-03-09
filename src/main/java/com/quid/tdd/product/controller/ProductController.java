@@ -34,16 +34,19 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ProductResponse getProduct(@PathVariable(name = "id") Long id) {
         return productFindUseCase.findProduct(id);
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> getAllProducts() {
         return productFindUseCase.findAllProducts();
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.OK)
     public void updateProduct(@RequestBody UpdateProductRequest request) {
         productUpdateUseCase.updateProduct(request);
     }

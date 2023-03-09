@@ -10,7 +10,7 @@ public interface ProductRepository {
 
     Product save(Product product);
 
-    Product findByIdOrThrow(Long productId);
+    Product findById(Long productId);
 
     List<Product> findAll();
 
@@ -28,7 +28,7 @@ public interface ProductRepository {
         }
 
         @Override
-        public Product findByIdOrThrow(Long productId) {
+        public Product findById(Long productId) {
             return productJpaRepository.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("Product not found"));
         }

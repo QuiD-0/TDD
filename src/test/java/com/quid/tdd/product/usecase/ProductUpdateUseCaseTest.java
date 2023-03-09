@@ -11,7 +11,7 @@ import com.quid.tdd.product.domain.repository.ProductRepository;
 import com.quid.tdd.product.usecase.ProductFindUseCase.ProductFindUseCaseImpl;
 import com.quid.tdd.product.usecase.ProductSaveUseCase.ProductSaveUseCaseImpl;
 import com.quid.tdd.product.usecase.ProductUpdateUseCase.ProductUpdateUseCaseImpl;
-import com.quid.tdd.product.fake.FakeProductRepository;
+import com.quid.tdd.product.usecase.fake.FakeProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

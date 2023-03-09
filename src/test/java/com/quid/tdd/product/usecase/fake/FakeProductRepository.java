@@ -1,4 +1,4 @@
-package com.quid.tdd.product.fake;
+package com.quid.tdd.product.usecase.fake;
 
 import com.quid.tdd.product.controller.model.UpdateProductRequest;
 import com.quid.tdd.product.domain.Product;
@@ -18,7 +18,7 @@ public class FakeProductRepository implements ProductRepository {
     }
 
     @Override
-    public Product findByIdOrThrow(Long productId) {
+    public Product findById(Long productId) {
         Product product = persistence.get(productId);
         if (product == null) {
             throw new IllegalArgumentException("Product not found");
