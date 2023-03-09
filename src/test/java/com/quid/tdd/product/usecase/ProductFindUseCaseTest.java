@@ -4,6 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
 import com.quid.tdd.product.controller.model.AddProductRequest;
+import com.quid.tdd.product.controller.model.ProductResponse;
 import com.quid.tdd.product.domain.DiscoundPolicy;
 import com.quid.tdd.product.domain.Product;
 import com.quid.tdd.product.domain.repository.ProductRepository;
@@ -33,9 +34,9 @@ public class ProductFindUseCaseTest {
     void find_product_by_id() {
         final Long productId = 1L;
 
-        Product product = productFindUseCase.findByIdOrThrow(productId);
+        ProductResponse product = productFindUseCase.findProduct(productId);
 
-        assertThat(product.getName()).isEqualTo("상품명");
+        assertThat(product.name()).isEqualTo("상품명");
     }
 
     @Test
@@ -43,13 +44,14 @@ public class ProductFindUseCaseTest {
     void find_product_by_id_when_product_is_not_exist() {
         final Long productId = 2L;
 
-        assertThatCode(() -> productFindUseCase.findByIdOrThrow(productId)).isInstanceOf(IllegalArgumentException.class);
+        assertThatCode(() -> productFindUseCase.findProduct(productId)).isInstanceOf(
+            IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("상품의 리스트를 조회한다.")
     void find_product_list() {
-        List<Product> list = productFindUseCase.findAll();
+        List<ProductResponse> list = productFindUseCase.findAllProducts();
 
         assertThat(list.size()).isEqualTo(1);
     }
