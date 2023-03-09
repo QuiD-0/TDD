@@ -23,13 +23,15 @@ public interface ProductFindUseCase {
         @Override
         @Transactional(readOnly = true)
         public ProductResponse findProduct(Long productId) {
-            return ProductResponse.of(productRepository.findByIdOrThrow(productId));
+            Product product = productRepository.findByIdOrThrow(productId);
+            return ProductResponse.of(product);
         }
 
         @Override
         @Transactional(readOnly = true)
         public List<ProductResponse> findAllProducts() {
-            return productRepository.findAll().stream().map(ProductResponse::of).toList();
+            List<Product> products = productRepository.findAll();
+            return ProductResponse.listOf(products);
         }
     }
 }
