@@ -21,8 +21,7 @@ public interface ProductUpdateUseCase {
         @Override
         @Transactional
         public void updateProduct(UpdateProductRequest request) {
-            Product product = productRepository.findByIdOrThrow(request.id());
-            productRepository.updateProduct(product, request);
+            Product product = productRepository.updateProduct(request);
             ProductValidator.validate(product);
         }
 
