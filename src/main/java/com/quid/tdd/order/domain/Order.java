@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 import com.quid.tdd.product.domain.Product;
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,16 +27,17 @@ public class Order {
     private Product product;
     private String ordererName;
     private Integer quantity;
-    private Double totalPrice;
+    private Long totalPrice;
 
     private Order(Product product, String ordererName, Integer quantity) {
         this.product = product;
         this.ordererName = ordererName;
         this.quantity = quantity;
-        this.totalPrice = product.getDiscountPrice() * quantity;
+        this.totalPrice = Math.round(product.getDiscountPrice() * quantity);
     }
 
     public static Order of(Product product, String ordererName, Integer quantity) {
         return new Order(product, ordererName, quantity);
     }
+
 }
