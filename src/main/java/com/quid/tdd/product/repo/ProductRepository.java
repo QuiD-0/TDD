@@ -1,4 +1,4 @@
-package com.quid.tdd.product.domain.repository;
+package com.quid.tdd.product.repo;
 
 import com.quid.tdd.product.controller.model.UpdateProductRequest;
 import com.quid.tdd.product.domain.Product;

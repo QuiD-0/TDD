@@ -7,7 +7,7 @@ import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.controller.model.ProductResponse;
 import com.quid.tdd.product.controller.model.UpdateProductRequest;
 import com.quid.tdd.product.domain.DiscoundPolicy;
-import com.quid.tdd.product.domain.repository.ProductRepository;
+import com.quid.tdd.product.repo.ProductRepository;
 import com.quid.tdd.product.usecase.ProductFindUseCase.ProductFindUseCaseImpl;
 import com.quid.tdd.product.usecase.ProductSaveUseCase.ProductSaveUseCaseImpl;
 import com.quid.tdd.product.usecase.ProductUpdateUseCase.ProductUpdateUseCaseImpl;
@@ -20,6 +20,7 @@ public class ProductUpdateUseCaseTest {
 
     private ProductUpdateUseCase productUpdateUseCase;
     private ProductFindUseCase productFindUseCase;
+    private UpdateProductRequest request = new UpdateProductRequest(1L , "업데이트된 상품명", 2000L);
 
     @BeforeEach
     void setUp() {
@@ -27,7 +28,7 @@ public class ProductUpdateUseCaseTest {
         ProductSaveUseCase productSaveUseCase = new ProductSaveUseCaseImpl(fakeProductRepository);
         productUpdateUseCase = new ProductUpdateUseCaseImpl(fakeProductRepository);
         productFindUseCase = new ProductFindUseCaseImpl(fakeProductRepository);
-        final AddProductRequest request = new AddProductRequest("상품명", 1000, DiscoundPolicy.NONE);
+        final AddProductRequest request = new AddProductRequest("상품명", 1000L, DiscoundPolicy.NONE, 10);
         productSaveUseCase.addProduct(request);
     }
 
@@ -35,7 +36,6 @@ public class ProductUpdateUseCaseTest {
     @DisplayName("상품을 수정한다.")
     void update_product() {
         final Long productId = 1L;
-        final UpdateProductRequest request = new UpdateProductRequest(1L , "업데이트된 상품명", 2000);
 
         productUpdateUseCase.updateProduct(request);
 
@@ -47,8 +47,6 @@ public class ProductUpdateUseCaseTest {
     @Test
     @DisplayName("상품을 수정할 때, 상품명이 없으면 예외를 발생시킨다.")
     void update_product_with_no_name() {
-        final UpdateProductRequest request = new UpdateProductRequest(1L , null, 2000);
-
         assertThatCode(() -> productUpdateUseCase.updateProduct(request))
             .isInstanceOf(IllegalArgumentException.class);
     }

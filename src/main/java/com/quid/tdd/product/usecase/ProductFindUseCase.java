@@ -2,7 +2,7 @@ package com.quid.tdd.product.usecase;
 
 import com.quid.tdd.product.controller.model.ProductResponse;
 import com.quid.tdd.product.domain.Product;
-import com.quid.tdd.product.domain.repository.ProductRepository;
+import com.quid.tdd.product.repo.ProductRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

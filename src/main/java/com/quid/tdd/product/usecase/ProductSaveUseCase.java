@@ -4,7 +4,7 @@ import static com.quid.tdd.product.domain.ProductValidator.*;
 
 import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.domain.Product;
-import com.quid.tdd.product.domain.repository.ProductRepository;
+import com.quid.tdd.product.repo.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

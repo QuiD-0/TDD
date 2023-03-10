@@ -2,7 +2,7 @@ package com.quid.tdd.product.usecase.fake;
 
 import com.quid.tdd.product.controller.model.UpdateProductRequest;
 import com.quid.tdd.product.domain.Product;
-import com.quid.tdd.product.domain.repository.ProductRepository;
+import com.quid.tdd.product.repo.ProductRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
