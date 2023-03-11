@@ -2,6 +2,7 @@ package com.quid.tdd.order.repo;
 
 
 import com.quid.tdd.order.domain.Order;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,8 @@ public interface OrderRepository {
     Order createOrder(Order order);
 
     Order findById(long id);
+
+    List<Order> findByOrdererName(String ordererName);
 
     @Repository
     @RequiredArgsConstructor
@@ -27,6 +30,11 @@ public interface OrderRepository {
         public Order findById(long id) {
             return orderJpaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
+        }
+
+        @Override
+        public List<Order> findByOrdererName(String ordererName) {
+            return orderJpaRepository.findByOrdererName(ordererName);
         }
     }
 }

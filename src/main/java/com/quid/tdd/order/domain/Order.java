@@ -6,6 +6,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 import com.quid.tdd.product.domain.Product;
 import java.math.BigDecimal;
+import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
