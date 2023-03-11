@@ -9,13 +9,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface ProductSaveUseCase {
+public interface ProductCreateUseCase {
 
     Product addProduct(AddProductRequest request);
 
     @Service
     @RequiredArgsConstructor
-    class ProductSaveUseCaseImpl implements ProductSaveUseCase {
+    class ProductCreateUseCaseImpl implements ProductCreateUseCase {
 
         private final ProductRepository productRepository;
 

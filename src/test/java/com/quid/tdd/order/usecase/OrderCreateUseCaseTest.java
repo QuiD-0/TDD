@@ -1,6 +1,6 @@
 package com.quid.tdd.order.usecase;
 
-import static com.quid.tdd.product.usecase.ProductSaveUseCase.ProductSaveUseCaseImpl;
+import static com.quid.tdd.product.usecase.ProductCreateUseCase.ProductCreateUseCaseImpl;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.quid.tdd.order.controller.model.OrderCreateRequest;
@@ -11,7 +11,7 @@ import com.quid.tdd.order.usecase.fake.FakeOrderRepository;
 import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.domain.DiscoundPolicy;
 import com.quid.tdd.product.repo.ProductRepository;
-import com.quid.tdd.product.usecase.ProductSaveUseCase;
+import com.quid.tdd.product.usecase.ProductCreateUseCase;
 import com.quid.tdd.product.usecase.fake.FakeProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,16 +19,6 @@ import org.junit.jupiter.api.Test;
 public class OrderCreateUseCaseTest {
 
     private OrderCreateUseCase orderCreateUseCase;
-
-    @BeforeEach
-    void setUp() {
-        OrderRepository fakeOrderRepository = new FakeOrderRepository();
-        ProductRepository fakeProductRepository = new FakeProductRepository();
-        ProductSaveUseCase productSaveUseCase = new ProductSaveUseCaseImpl(fakeProductRepository);
-        productSaveUseCase.addProduct(
-            new AddProductRequest("quid", 1000L, DiscoundPolicy.FIVE_PERCENT, 10));
-        orderCreateUseCase = new OrderCreateUseCaseImpl(fakeOrderRepository, fakeProductRepository);
-    }
 
     @Test
     void createOrder() {
@@ -45,4 +35,14 @@ public class OrderCreateUseCaseTest {
         assertThat(order.getTotalPrice()).isEqualTo(950);
     }
 
+
+    @BeforeEach
+    void setUp() {
+        OrderRepository fakeOrderRepository = new FakeOrderRepository();
+        ProductRepository fakeProductRepository = new FakeProductRepository();
+        ProductCreateUseCase productSaveUseCase = new ProductCreateUseCaseImpl(fakeProductRepository);
+        productSaveUseCase.addProduct(
+            new AddProductRequest("quid", 1000L, DiscoundPolicy.FIVE_PERCENT, 10));
+        orderCreateUseCase = new OrderCreateUseCaseImpl(fakeOrderRepository, fakeProductRepository);
+    }
 }

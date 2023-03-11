@@ -12,8 +12,8 @@ import com.quid.tdd.order.usecase.fake.FakeOrderRepository;
 import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.domain.DiscoundPolicy;
 import com.quid.tdd.product.repo.ProductRepository;
-import com.quid.tdd.product.usecase.ProductSaveUseCase;
-import com.quid.tdd.product.usecase.ProductSaveUseCase.ProductSaveUseCaseImpl;
+import com.quid.tdd.product.usecase.ProductCreateUseCase;
+import com.quid.tdd.product.usecase.ProductCreateUseCase.ProductCreateUseCaseImpl;
 import com.quid.tdd.product.usecase.fake.FakeProductRepository;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,17 +22,6 @@ import org.junit.jupiter.api.Test;
 
 public class OrderFindUseCaseTest {
     private OrderFindUseCase orderFindUseCase;
-
-    @BeforeEach
-    void setUp() {
-        OrderRepository fakeOrderRepository = new FakeOrderRepository();
-        ProductRepository fakeProductRepository = new FakeProductRepository();
-        ProductSaveUseCase productSaveUseCase = new ProductSaveUseCaseImpl(fakeProductRepository);
-        OrderCreateUseCase orderCreateUseCase = new OrderCreateUseCaseImpl(fakeOrderRepository, fakeProductRepository);
-        orderFindUseCase = new OrderFindUseCaseImpl(fakeOrderRepository);
-        productSaveUseCase.addProduct(new AddProductRequest("quid", 1000L, DiscoundPolicy.FIVE_PERCENT, 10));
-        orderCreateUseCase.createOrder(new OrderCreateRequest(1L, 1, "quid"));
-    }
 
     @Test
     @DisplayName("주문을 찾는다.")
@@ -57,4 +46,14 @@ public class OrderFindUseCaseTest {
         assertThat(order.size()).isEqualTo(1);
     }
 
+    @BeforeEach
+    void setUp() {
+        OrderRepository fakeOrderRepository = new FakeOrderRepository();
+        ProductRepository fakeProductRepository = new FakeProductRepository();
+        ProductCreateUseCase productSaveUseCase = new ProductCreateUseCaseImpl(fakeProductRepository);
+        OrderCreateUseCase orderCreateUseCase = new OrderCreateUseCaseImpl(fakeOrderRepository, fakeProductRepository);
+        orderFindUseCase = new OrderFindUseCaseImpl(fakeOrderRepository);
+        productSaveUseCase.addProduct(new AddProductRequest("quid", 1000L, DiscoundPolicy.FIVE_PERCENT, 10));
+        orderCreateUseCase.createOrder(new OrderCreateRequest(1L, 1, "quid"));
+    }
 }

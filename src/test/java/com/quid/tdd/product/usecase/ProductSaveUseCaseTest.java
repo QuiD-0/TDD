@@ -9,20 +9,14 @@ import com.quid.tdd.product.domain.DiscoundPolicy;
 import com.quid.tdd.product.domain.Product;
 import com.quid.tdd.product.repo.ProductRepository;
 import com.quid.tdd.product.usecase.fake.FakeProductRepository;
-import com.quid.tdd.product.usecase.ProductSaveUseCase.ProductSaveUseCaseImpl;
+import com.quid.tdd.product.usecase.ProductCreateUseCase.ProductCreateUseCaseImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ProductSaveUseCaseTest {
 
-    private ProductSaveUseCase productService;
-
-    @BeforeEach
-    void setUp() {
-        ProductRepository fakeProductRepository = new FakeProductRepository();
-        productService = new ProductSaveUseCaseImpl(fakeProductRepository);
-    }
+    private ProductCreateUseCase productService;
 
     @Test
     @DisplayName("상품을 추가한다.")
@@ -48,5 +42,11 @@ public class ProductSaveUseCaseTest {
         final AddProductRequest request = new AddProductRequest(null, 1000L, DiscoundPolicy.NONE, 10);
 
         assertThatCode(() -> productService.addProduct(request)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @BeforeEach
+    void setUp() {
+        ProductRepository fakeProductRepository = new FakeProductRepository();
+        productService = new ProductCreateUseCaseImpl(fakeProductRepository);
     }
 }

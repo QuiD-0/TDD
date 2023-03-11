@@ -5,7 +5,7 @@ import com.quid.tdd.product.controller.model.ProductResponse;
 import com.quid.tdd.product.controller.model.UpdateProductRequest;
 import com.quid.tdd.product.domain.Product;
 import com.quid.tdd.product.usecase.ProductFindUseCase;
-import com.quid.tdd.product.usecase.ProductSaveUseCase;
+import com.quid.tdd.product.usecase.ProductCreateUseCase;
 import com.quid.tdd.product.usecase.ProductUpdateUseCase;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
-    private final ProductSaveUseCase productSaveUsecase;
+    private final ProductCreateUseCase productSaveUsecase;
     private final ProductUpdateUseCase productUpdateUseCase;
     private final ProductFindUseCase productFindUseCase;
 
