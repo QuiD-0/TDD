@@ -7,6 +7,7 @@ import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.controller.model.ProductResponse;
 import com.quid.tdd.product.controller.model.UpdateProductRequest;
 import com.quid.tdd.product.domain.DiscoundPolicy;
+import com.quid.tdd.product.domain.Product;
 import com.quid.tdd.product.repo.ProductRepository;
 import com.quid.tdd.product.usecase.ProductFindUseCase.ProductFindUseCaseImpl;
 import com.quid.tdd.product.usecase.ProductSaveUseCase.ProductSaveUseCaseImpl;
@@ -39,9 +40,9 @@ public class ProductUpdateUseCaseTest {
 
         productUpdateUseCase.updateProduct(request);
 
-        ProductResponse product = productFindUseCase.findProduct(productId);
-        assertThat(product.name()).isEqualTo("업데이트된 상품명");
-        assertThat(product.price()).isEqualTo(2000);
+        Product product = productFindUseCase.findProduct(productId);
+        assertThat(product.getName()).isEqualTo("업데이트된 상품명");
+        assertThat(product.getPrice()).isEqualTo(2000);
     }
 
     @Test

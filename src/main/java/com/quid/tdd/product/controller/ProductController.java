@@ -3,6 +3,7 @@ package com.quid.tdd.product.controller;
 import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.controller.model.ProductResponse;
 import com.quid.tdd.product.controller.model.UpdateProductRequest;
+import com.quid.tdd.product.domain.Product;
 import com.quid.tdd.product.usecase.ProductFindUseCase;
 import com.quid.tdd.product.usecase.ProductSaveUseCase;
 import com.quid.tdd.product.usecase.ProductUpdateUseCase;
@@ -36,13 +37,15 @@ public class ProductController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProductResponse getProduct(@PathVariable(name = "id") Long id) {
-        return productFindUseCase.findProduct(id);
+        Product product = productFindUseCase.findProduct(id);
+        return ProductResponse.of(product);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> getAllProducts() {
-        return productFindUseCase.findAllProducts();
+        List<Product> allProducts = productFindUseCase.findAllProducts();
+        return ProductResponse.listOf(allProducts);
     }
 
     @PutMapping

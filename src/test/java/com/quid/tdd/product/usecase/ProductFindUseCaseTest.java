@@ -6,6 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.controller.model.ProductResponse;
 import com.quid.tdd.product.domain.DiscoundPolicy;
+import com.quid.tdd.product.domain.Product;
 import com.quid.tdd.product.repo.ProductRepository;
 import com.quid.tdd.product.usecase.ProductFindUseCase.ProductFindUseCaseImpl;
 import com.quid.tdd.product.usecase.ProductSaveUseCase.ProductSaveUseCaseImpl;
@@ -33,9 +34,9 @@ public class ProductFindUseCaseTest {
     void find_product_by_id() {
         final Long productId = 1L;
 
-        ProductResponse product = productFindUseCase.findProduct(productId);
+        Product product = productFindUseCase.findProduct(productId);
 
-        assertThat(product.name()).isEqualTo("상품명");
+        assertThat(product.getName()).isEqualTo("상품명");
     }
 
     @Test
@@ -50,7 +51,7 @@ public class ProductFindUseCaseTest {
     @Test
     @DisplayName("상품의 리스트를 조회한다.")
     void find_product_list() {
-        List<ProductResponse> list = productFindUseCase.findAllProducts();
+        List<Product> list = productFindUseCase.findAllProducts();
 
         assertThat(list.size()).isEqualTo(1);
     }

@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface ProductFindUseCase {
 
-    ProductResponse findProduct(Long productId);
+    Product findProduct(Long productId);
 
-    List<ProductResponse> findAllProducts();
+    List<Product> findAllProducts();
 
     @Service
     @RequiredArgsConstructor
@@ -22,16 +22,15 @@ public interface ProductFindUseCase {
 
         @Override
         @Transactional(readOnly = true)
-        public ProductResponse findProduct(Long productId) {
+        public Product findProduct(Long productId) {
             Product product = productRepository.findById(productId);
-            return ProductResponse.of(product);
+            return product;
         }
 
         @Override
         @Transactional(readOnly = true)
-        public List<ProductResponse> findAllProducts() {
-            List<Product> products = productRepository.findAll();
-            return ProductResponse.listOf(products);
+        public List<Product> findAllProducts() {
+            return productRepository.findAll();
         }
     }
 }
