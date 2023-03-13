@@ -14,4 +14,13 @@ public class FakePaymentRepository implements PaymentRepository {
         persistence.put(1L, payment);
         return payment;
     }
+
+    @Override
+    public Payment findById(Long id) {
+        Payment payment = persistence.get(id);
+        if (payment == null) {
+            throw new RuntimeException("Payment not found");
+        }
+        return payment;
+    }
 }

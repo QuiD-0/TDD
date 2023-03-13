@@ -8,6 +8,8 @@ public interface PaymentRepository {
 
     Payment save(Payment toPayment);
 
+    Payment findById(Long id);
+
     @Repository
     @RequiredArgsConstructor
     class PaymentRepositoryImpl implements PaymentRepository {
@@ -17,6 +19,12 @@ public interface PaymentRepository {
         @Override
         public Payment save(Payment payment) {
             return jpaRepository.save(payment);
+        }
+
+        @Override
+        public Payment findById(Long id) {
+            return jpaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Payment not found"));
         }
     }
 }
