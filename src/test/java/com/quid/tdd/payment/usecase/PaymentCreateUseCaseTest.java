@@ -7,8 +7,8 @@ import com.quid.tdd.order.repo.OrderRepository;
 import com.quid.tdd.order.usecase.OrderCreateUseCase;
 import com.quid.tdd.order.usecase.OrderCreateUseCase.OrderCreateUseCaseImpl;
 import com.quid.tdd.order.usecase.fake.FakeOrderRepository;
-import com.quid.tdd.payment.controller.model.PaymentCreateRequest;
-import com.quid.tdd.payment.domain.Card;
+import com.quid.tdd.payment.controller.model.CardInfo;
+import com.quid.tdd.payment.controller.model.CreatePaymentRequest;
 import com.quid.tdd.payment.domain.Payment;
 import com.quid.tdd.payment.repository.PaymentRepository;
 import com.quid.tdd.payment.usecase.PaymentCreateUseCase.PaymentCreateUseCaseImpl;
@@ -31,8 +31,8 @@ public class PaymentCreateUseCaseTest {
     @Test
     @DisplayName("결제를 생성한다.")
     void createPayment() {
-        PaymentCreateRequest request = new PaymentCreateRequest(1L,
-            Card.of("quid", "1234-1234-1234-1234", 123, LocalDate.now().plusDays(10)));
+        CreatePaymentRequest request = new CreatePaymentRequest(1L,
+            CardInfo.of("quid", "1234-1234-1234-1234", 123, LocalDate.now().plusDays(10)));
 
         Payment payment = paymentCreateUseCase.createPayment(request);
         assertThat(payment.getCard().owner()).isEqualTo("quid");
@@ -44,9 +44,11 @@ public class PaymentCreateUseCaseTest {
         OrderRepository orderRepository = new FakeOrderRepository();
         ProductRepository productRepository = new FakeProductRepository();
         ProductCreateUseCase productSaveUseCase = new ProductCreateUseCaseImpl(productRepository);
-        OrderCreateUseCase orderSaveUseCase = new OrderCreateUseCaseImpl(orderRepository, productRepository);
+        OrderCreateUseCase orderSaveUseCase = new OrderCreateUseCaseImpl(orderRepository,
+            productRepository);
         OrderCreateRequest request = new OrderCreateRequest(1L, 10, "quid");
-        AddProductRequest productRequest = new AddProductRequest("coffee", 10000L, DiscoundPolicy.NONE, 1000);
+        AddProductRequest productRequest = new AddProductRequest("coffee", 10000L,
+            DiscoundPolicy.NONE, 1000);
         productSaveUseCase.addProduct(productRequest);
         orderSaveUseCase.createOrder(request);
         paymentCreateUseCase = new PaymentCreateUseCaseImpl(paymentRepository, orderRepository);

@@ -1,20 +1,28 @@
 package com.quid.tdd.payment.domain;
 
 import java.time.LocalDate;
-import org.springframework.util.Assert;
+import lombok.NoArgsConstructor;
 
-public record Card(String owner, String number, Integer cvc, LocalDate expiredDate) {
+@NoArgsConstructor
+public class Card {
 
-    public Card {
-        Assert.notNull(owner, "owner must not be null");
-        Assert.notNull(number, "number must not be null");
-        Assert.notNull(cvc, "cvc must not be null");
-        if (expiredDate.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("expiredDate must be after today");
-        }
+    private String owner;
+    private String number;
+    private Integer cvc;
+    private LocalDate expiredDate;
+
+    public Card(String owner, String number, Integer cvc, LocalDate expiredDate) {
+        this.owner = owner;
+        this.number = number;
+        this.cvc = cvc;
+        this.expiredDate = expiredDate;
     }
 
     public static Card of(String owner, String number, Integer cvc, LocalDate expiredDate) {
         return new Card(owner, number, cvc, expiredDate);
+    }
+
+    public String owner() {
+        return owner;
     }
 }

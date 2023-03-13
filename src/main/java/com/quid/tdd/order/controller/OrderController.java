@@ -1,6 +1,7 @@
 package com.quid.tdd.order.controller;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 import com.quid.tdd.order.controller.model.OrderCreateRequest;
 import com.quid.tdd.order.controller.model.OrderResponse;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/orders")
+@RequestMapping("/orders")
 public class OrderController {
 
     private final OrderCreateUseCase orderCreateUseCase;
@@ -31,6 +32,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(OK)
     public OrderResponse findOrder(@PathVariable long id) {
         Order order = orderFindUseCase.findOrder(id);
         return OrderResponse.of(order);
