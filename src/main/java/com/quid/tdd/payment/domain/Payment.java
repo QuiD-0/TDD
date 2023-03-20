@@ -1,5 +1,6 @@
 package com.quid.tdd.payment.domain;
 
+import static com.quid.tdd.payment.domain.PaymentValidator.validate;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -12,7 +13,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.util.Assert;
 
 @Getter
 @Entity
@@ -29,8 +29,7 @@ public class Payment {
     private Order order;
 
     private Payment(Card card, Order order) {
-        Assert.notNull(card, "card must not be null");
-        Assert.notNull(order, "order must not be null");
+        validate(card, order);
         this.card = card;
         this.order = order;
     }

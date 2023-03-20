@@ -1,7 +1,5 @@
 package com.quid.tdd.product.usecase;
 
-import static com.quid.tdd.product.domain.ProductValidator.*;
-
 import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.domain.Product;
 import com.quid.tdd.product.repo.ProductRepository;
@@ -22,8 +20,7 @@ public interface ProductCreateUseCase {
         @Override
         @Transactional
         public Product addProduct(AddProductRequest request) {
-            Product product = validate(request.toProduct());
-            return productRepository.save(product);
+            return productRepository.save(request.toProduct());
         }
     }
 

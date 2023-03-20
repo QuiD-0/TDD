@@ -32,10 +32,9 @@ public class FakeProductRepository implements ProductRepository {
     }
 
     @Override
-    public Product updateProduct(UpdateProductRequest request) {
+    public void updateProduct(UpdateProductRequest request) {
         Product product = persistence.get(request.id());
         product.update(request.name(), request.price());
         persistence.put(1L, product);
-        return product;
     }
 }

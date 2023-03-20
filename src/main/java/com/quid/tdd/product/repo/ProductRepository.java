@@ -14,7 +14,7 @@ public interface ProductRepository {
 
     List<Product> findAll();
 
-    Product updateProduct(UpdateProductRequest request);
+    void updateProduct(UpdateProductRequest request);
 
     @Repository
     @RequiredArgsConstructor
@@ -39,12 +39,12 @@ public interface ProductRepository {
         }
 
         @Override
-        public Product updateProduct(UpdateProductRequest request) {
+        public void updateProduct(UpdateProductRequest request) {
             Product product = productJpaRepository.findById(request.id())
                 .orElseThrow(IllegalArgumentException::new);
 
             product.update(request.name(), request.price());
-            return productJpaRepository.save(product);
+            productJpaRepository.save(product);
         }
     }
 }
