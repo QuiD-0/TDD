@@ -24,6 +24,7 @@ public interface PaymentCreateUseCase {
         @Override
         public Payment createPayment(CreatePaymentRequest request) {
             Order order = orderRepository.findById(request.orderId());
+            order.payComplete();
 
             return paymentRepository.save(request.toPayment(order));
         }
