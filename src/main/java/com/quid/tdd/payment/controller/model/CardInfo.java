@@ -12,10 +12,10 @@ public record CardInfo(String owner, String number, Integer cvc, LocalDate expir
         if (number == null) {
             throw new IllegalArgumentException("number must not be null");
         }
-        if (cvc >= 100 && cvc <= 999) {
+        if (cvc <= 100 || cvc >= 999) {
             throw new IllegalArgumentException("cvc must be 3 digits");
         }
-        if (expiredDate.isAfter(LocalDate.now())) {
+        if (expiredDate.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("expiredDate must be after today");
         }
     }

@@ -10,8 +10,10 @@ import com.quid.tdd.order.usecase.fake.FakeOrderRepository;
 import com.quid.tdd.payment.controller.model.CardInfo;
 import com.quid.tdd.payment.controller.model.CreatePaymentRequest;
 import com.quid.tdd.payment.domain.Payment;
+import com.quid.tdd.payment.gateway.PaymentGateway;
 import com.quid.tdd.payment.repository.PaymentRepository;
 import com.quid.tdd.payment.usecase.PaymentCreateUseCase.PaymentCreateUseCaseImpl;
+import com.quid.tdd.payment.usecase.fake.FakePaymentGateway;
 import com.quid.tdd.payment.usecase.fake.FakePaymentRepository;
 import com.quid.tdd.product.controller.model.AddProductRequest;
 import com.quid.tdd.product.domain.DiscoundPolicy;
@@ -23,6 +25,8 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 public class PaymentCreateUseCaseTest {
 
@@ -49,8 +53,9 @@ public class PaymentCreateUseCaseTest {
         OrderCreateRequest request = new OrderCreateRequest(1L, 10, "quid");
         AddProductRequest productRequest = new AddProductRequest("coffee", 10000L,
             DiscoundPolicy.NONE, 1000);
+        PaymentGateway paymentGateway = new FakePaymentGateway();
         productSaveUseCase.addProduct(productRequest);
         orderSaveUseCase.createOrder(request);
-        paymentCreateUseCase = new PaymentCreateUseCaseImpl(paymentRepository, orderRepository);
+        paymentCreateUseCase = new PaymentCreateUseCaseImpl(paymentRepository, orderRepository, paymentGateway);
     }
 }

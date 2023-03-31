@@ -4,11 +4,11 @@ import com.quid.tdd.payment.domain.Card;
 import java.util.UUID;
 
 
-public record PayRequest(Long userId, Card card, Long totalAmount, UUID transactionId) {
+public record PayRequest(String userName, Card card, Long totalAmount, UUID transactionId) {
 
     public PayRequest {
-        if (userId == null) {
-            throw new IllegalArgumentException("userId must not be null");
+        if (userName == null) {
+            throw new IllegalArgumentException("userName must not be null");
         }
         if (card == null) {
             throw new IllegalArgumentException("card must not be null");
@@ -18,7 +18,7 @@ public record PayRequest(Long userId, Card card, Long totalAmount, UUID transact
         }
     }
 
-    public static PayRequest of(Long userId, Card card, Long totalAmount) {
-        return new PayRequest(userId, card, totalAmount, UUID.randomUUID());
+    public static PayRequest of(String userName, Card card, Long totalPrice) {
+        return new PayRequest(userName, card, totalPrice, UUID.randomUUID());
     }
 }

@@ -5,6 +5,7 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import com.quid.tdd.order.domain.Order;
+import java.util.UUID;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,16 +28,16 @@ public class Payment {
     private Card card;
     @OneToOne(fetch = LAZY)
     private Order order;
-    private Long payTransactionId;
+    private UUID payTransactionId;
 
-    private Payment(Card card, Order order, Long payTransactionId) {
+    private Payment(Card card, Order order, UUID payTransactionId) {
         validate(card, order);
         this.card = card;
         this.order = order;
         this.payTransactionId = payTransactionId;
     }
 
-    public static Payment of(Card card, Order order, Long payTransactionId) {
+    public static Payment of(Card card, Order order, UUID payTransactionId) {
         return new Payment(card, order, payTransactionId);
     }
 
