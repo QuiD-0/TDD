@@ -14,7 +14,7 @@ public record CreatePaymentRequest(Long orderId, CardInfo cardInfo) {
         }
     }
 
-    public Payment toPayment(Order order) {
-        return Payment.of(cardInfo.toCard(), order);
+    public Payment toPayment(Order order, Long payTransactionId) {
+        return Payment.of(cardInfo.toCard(), order, payTransactionId);
     }
 }

@@ -7,6 +7,7 @@ import com.quid.tdd.payment.domain.Payment;
 import com.quid.tdd.payment.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface PaymentCreateUseCase {
 
@@ -15,6 +16,7 @@ public interface PaymentCreateUseCase {
     Payment getPayment(Long id);
 
     @Service
+    @Transactional
     @RequiredArgsConstructor
     class PaymentCreateUseCaseImpl implements PaymentCreateUseCase {
 
@@ -24,9 +26,10 @@ public interface PaymentCreateUseCase {
         @Override
         public Payment createPayment(CreatePaymentRequest request) {
             Order order = orderRepository.findById(request.orderId());
+            Long payTransactionId = 1L;
             order.payComplete();
 
-            return paymentRepository.save(request.toPayment(order));
+            return paymentRepository.save(request.toPayment(order,payTransactionId));
         }
 
         @Override

@@ -27,15 +27,17 @@ public class Payment {
     private Card card;
     @OneToOne(fetch = LAZY)
     private Order order;
+    private Long payTransactionId;
 
-    private Payment(Card card, Order order) {
+    private Payment(Card card, Order order, Long payTransactionId) {
         validate(card, order);
         this.card = card;
         this.order = order;
+        this.payTransactionId = payTransactionId;
     }
 
-    public static Payment of(Card card, Order order) {
-        return new Payment(card, order);
+    public static Payment of(Card card, Order order, Long payTransactionId) {
+        return new Payment(card, order, payTransactionId);
     }
 
     public String getProductName() {
