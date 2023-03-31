@@ -1,13 +1,17 @@
 package com.quid.tdd.payment.domain;
 
-import java.time.LocalDate;
+import static lombok.AccessLevel.PRIVATE;
 
+import java.time.LocalDate;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = PRIVATE)
 public class Card {
 
-    private final String owner;
-    private final String number;
-    private final Integer cvc;
-    private final LocalDate expiredDate;
+    private String owner;
+    private String number;
+    private Integer cvc;
+    private LocalDate expiredDate;
 
     private Card(String owner, String number, Integer cvc, LocalDate expiredDate) {
         this.owner = owner;

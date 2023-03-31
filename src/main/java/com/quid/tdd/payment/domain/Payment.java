@@ -6,6 +6,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import com.quid.tdd.order.domain.Order;
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,7 @@ public class Payment {
     private Card card;
     @OneToOne(fetch = LAZY)
     private Order order;
+    @Column(columnDefinition = "BINARY(16)")
     private UUID payTransactionId;
 
     private Payment(Card card, Order order, UUID payTransactionId) {

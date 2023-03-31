@@ -21,6 +21,6 @@ public record CreatePaymentRequest(Long orderId, CardInfo cardInfo) {
     }
 
     public PayRequest toPayRequest(Order order) {
-        return PayRequest.of(order.getOrdererName(), cardInfo.toCard(), order.getTotalPrice());
+        return PayRequest.of(order.getOrdererName(), cardInfo, order.getTotalPrice());
     }
 }

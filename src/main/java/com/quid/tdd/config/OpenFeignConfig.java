@@ -1,10 +1,13 @@
 package com.quid.tdd.config;
 
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import feign.Logger;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableFeignClients
 public class OpenFeignConfig {
-
+    @Bean
+    public Logger feignLogger() {
+        return FeignLogger.of();
+    }
 }

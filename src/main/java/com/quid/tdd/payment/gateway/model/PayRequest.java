@@ -1,10 +1,10 @@
 package com.quid.tdd.payment.gateway.model;
 
-import com.quid.tdd.payment.domain.Card;
+import com.quid.tdd.payment.controller.model.CardInfo;
 import java.util.UUID;
 
 
-public record PayRequest(String userName, Card card, Long totalAmount, UUID transactionId) {
+public record PayRequest(String userName, CardInfo card, Long totalAmount, UUID transactionId) {
 
     public PayRequest {
         if (userName == null) {
@@ -18,7 +18,7 @@ public record PayRequest(String userName, Card card, Long totalAmount, UUID tran
         }
     }
 
-    public static PayRequest of(String userName, Card card, Long totalPrice) {
+    public static PayRequest of(String userName, CardInfo card, Long totalPrice) {
         return new PayRequest(userName, card, totalPrice, UUID.randomUUID());
     }
 }

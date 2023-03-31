@@ -20,8 +20,8 @@ public record CardInfo(String owner, String number, Integer cvc, LocalDate expir
         }
     }
 
-    public static CardInfo of(String quid, String number, int cvc, LocalDate plusDays) {
-        return new CardInfo(quid, number, cvc, plusDays);
+    public static CardInfo of(String quid, String number, int cvc, LocalDate expiredDate) {
+        return new CardInfo(quid, number, cvc, expiredDate);
     }
 
     public Card toCard() {
